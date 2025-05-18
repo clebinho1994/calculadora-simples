@@ -1,3 +1,35 @@
-const display = document.querySelector('display');
-const botoes = document.querySelectorAll('button');
+let display = document.getElementById('display');
+let currentInput = "";
+let currentOperator = "";
 
+function appendNumber(value) {
+  currentInput += value;
+  display.textContent = currentInput;
+}
+
+function appendOperator(operator) {
+  if(currentInput === "" && operator !== ".") {
+    return;
+  } else {
+    currentInput += operator;
+  }
+  display.textContent = currentInput;
+}
+
+function calculate() {
+  try {
+    let result = eval(currentInput)
+    if(!Number.isInteger(result)){
+      result = result.toFixed(2);
+    }
+    currentInput = result;
+    display.textContent = currentInput;
+  } catch(error){
+    display.textContent = "Erro";
+  }
+}
+
+function clearDisplay() {
+  currentInput = "";
+  display.textContent = currentInput;
+}
